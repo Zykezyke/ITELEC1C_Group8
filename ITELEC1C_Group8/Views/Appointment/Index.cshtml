@@ -1,0 +1,211 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Appointment Page";
+}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Addicure</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/logo.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styleAppointment.css" rel="stylesheet" />
+    </head>
+    <body id="page-top"  >
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-white text-uppercase fixed-top" id="mainNav">
+          <div class="container">
+              <img src = "assets/logo.png" width="80" height="80">
+              <a class="navbar-brand" href="#page-top">ADDICURE</a>
+              <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  Menu
+                  <i class="fas fa-bars"></i>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.html">Home</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="about.html">About</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="services.html">Services</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="contact.html">Contact Us</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="appointment.html">Appointment</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="login.html">Logout</a></li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+        
+        <!-- Masthead-->
+        <header class="masthead" id="appointment" style="background-image: url('assets/clinicbg.jpg'); background-size: cover;">
+            <div class="container d-flex align-items-center flex-column">
+                <!-- Masthead Avatar Image-->
+                <img class="masthead-avatar mb-5" src="assets/img/logo.png" alt="..."  />
+                <!-- Masthead Heading-->
+                <h1 style="color:#101F90;text-align:center;">BOOK YOUR APPOINTMENT</h1>
+               <br>
+               <div class="card" width="30">
+                <!-- Start Card Body -->
+                <div class="card-body" >
+                  <!-- Start Form -->
+                  <form id="bookingForm" action="#" method="" class="needs-validation" novalidate autocomplete="off">
+                    <!-- Start Input Name -->
+                    <div class="form-group">
+                      <p>Name</p>
+                      <input type="text" class="form-control" id="inputName" name="name" placeholder="Your name" required />
+                  
+                    <br>
+                        
+                      </div>
+                    <!-- End Input Name -->
+            
+                    <!-- Start Input Email -->
+                    <div class="form-group">
+                      <label for="inputEmail">Email</label>
+                      <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter email" pattern="pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+                      
+                    </div>
+                    <br>
+                    <!-- End Input Email -->
+                    
+                    <!-- Start Input Telephone -->
+                    <div class="form-group">
+                      <label for="inputPhone">Phone</label>
+                      <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="Enter Phone" pattern="\d{3}\d{3}\d{4}" required />
+                      
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>Clinic Branch</label>
+                        <div class="d-flex flex-row justify-content-between align-items-center">
+                          <select class="form-control mr-1" id="clinic" name="clinic" required>
+                            <option value="" disabled selected>Select Clinic Branch..</option>
+                            <option value="1">Branch 1</option>
+                            <option value="2">Branch 2</option>
+                            <option value="3">Branch 3</option>
+                            <option value="4">Branch 4</option>
+                            <option value="5">Branch 5</option>
+                            <option value="6">Branch 6</option>
+                            <option value="7">Branch 7</option>
+                            <option value="8">Branch 8</option>
+                          </select>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                        <label>Medical Doctor</label>
+                        <div class="d-flex flex-row justify-content-between align-items-center">
+                          <select class="form-control mr-1" id="doctor" name="doctor" required>
+                            <option value="" disabled selected>Select Personal Doctor..</option>
+                            <option value="1">Doctor 1</option>
+                            <option value="2">Doctor 2</option>
+                            <option value="3">Doctor 3</option>
+                            <option value="4">Doctor 4</option>
+                            <option value="5">Doctor 5</option>
+                            <option value="6">Doctor 6</option>
+                            <option value="7">Doctor 7</option>
+                            <option value="8">Doctor 8</option>
+                          </select>
+                      </div>
+                
+                <br>
+    
+                    <!-- End Input Telephone -->
+                 
+                    <!-- Start Input Date , Start Time and End Time -->
+                    <div class="form-row">
+                      <!-- Start Input Date -->
+                      <div class="form-group col-md-4">
+                        <label for="inputDate">Date</label>
+                        <input type="date" style="width:100%;" class="form-control" id="inputDate" name="date" required />
+                        <small class="form-text text-muted">Please choose date for your appointment.</small>
+                      </div>
+                      <!-- End Input Date -->
+            
+                      <!-- End Input Start Time -->
+        
+                    </div>
+                    <!-- End Input Date , Start Time and End Time -->
+                    </div>
+                    <br>
+                    <!-- Start Age -->
+                    <div class="form-row">
+                      <label for="age">Age</label>
+                      <div class="row px-1">
+                          <input type="number"  class="form-control" id="age" name="age" min="0" max="99" placeholder="Enter your Age" />
+                         
+                        </div>
+                      </div>
+          
+                    <!-- End Age -->
+                   <br>
+                    <!-- Start Input Remark -->
+                    <div class="form-group" >
+                      <label for="textAreaRemark">Notes</label>
+                      <textarea  class="form-control"  name="remark" id="textAreaRemark" rows="2" placeholder="Leave a message/note to your Doctor "></textarea>
+                    </div>
+            
+                    <!-- End Input Remark -->
+            <br>
+                    <!-- Start Submit Button -->
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                    <!-- End Submit Button -->
+                  </form>
+                  <!-- End Form -->
+                </div>
+                <!-- End Card Body -->
+              </div>
+              <!-- End Card -->
+              </div>
+        </header>
+        <!-- Footer-->
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <!-- Footer Location-->
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Location</h4>
+                        <p class="lead mb-0">
+                            2215 John Daniel Drive
+                            <br />
+                            Clark, MO 65243
+                        </p>
+                    </div>
+                    <!-- Footer Social Icons-->
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">ADDICURE</h4>
+                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                    </div>
+                    <!-- Footer About Text-->
+                    <div class="col-lg-4">
+                        <h4 class="text-uppercase mb-4">About the Clinic</h4>
+                        <p class="lead mb-0">
+                            ADDICURE is a clinic that helps you with your specific medical needs. We provide cutting-edge services for medications and facilities for your wellness.
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
