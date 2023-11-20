@@ -1,18 +1,13 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    ViewData["Title"] = "Signup Page";
-}
-@model Users;
-<!DOCTYPE html>
+﻿@model LoginViewModel
+
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Sign up - Addicure</title>
+    <title>Login - Addicure</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/logo.png" />
     <!-- Font Awesome icons (free version)-->
@@ -21,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styleSignup.css" rel="stylesheet" />
+    <link href="css/styleLogin.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -30,27 +25,27 @@
         <div class="bannerimg">
             <img src="assets/logo.png" width="120" height="120" />
         </div>
-        <div class="signupform">
-            <form asp-action="AddUser" asp-controller="SignUp" method="post">
-                <h1>Sign Up</h1>
+        
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="loginform">
+            <form asp-action="Login" asp-controller="Login">
+                <h1>Login</h1>
                 <div class="input-box">
-                    <input type="text" asp-for="Email" placeholder="Email" required>
+                    <input asp-for="UserName" type="text" placeholder="Email" required>
                     <i class='bx bx-user'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" asp-for="Password" placeholder="Create Password" required>
+                    <input asp-for="Password" type="password" placeholder="Password" required>
                     <i class='bx bx-lock-alt'></i>
                 </div>
-                <div class="input-box">
-                    <input type="password" placeholder="Confirm Password" required>
-                    <i class='bx bx-lock-alt'></i>
-                </div>
-            
-            <button type="submit" class="btn" onclick="window.location.href='login.html';">Sign Up</button>
             </form>
-            <div class="new-acc">
+            <button class="btn" type="submit" value="submit">Login</button>
+            <div class="forgot-pass">
+                <a href="#">Forgot Password?</a>
+            </div>
+            <div class="forgot-pass">
                 <p>
-                    Already a member? <a href="login.html">Login</a>
+                    No account yet? <a href="signup.html">Sign Up</a>
             </div>
         </div>
     </div>
