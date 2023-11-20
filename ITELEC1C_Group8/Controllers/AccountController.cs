@@ -29,7 +29,7 @@ namespace ITELEC1C_Group8.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Instructor");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -68,7 +68,7 @@ namespace ITELEC1C_Group8.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Instructor");
+                    return RedirectToAction("Login", "Account");
                 }
                 else
                 {

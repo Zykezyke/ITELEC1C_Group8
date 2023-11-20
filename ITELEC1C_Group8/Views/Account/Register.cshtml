@@ -37,6 +37,7 @@
             <img src="~/assets/logo.png" width="120" height="120" />
         </div>
         <div class="signupform">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <form asp-action="Register" asp-controller="Account" method="post">
                 <h1>Sign Up</h1>
                 <div class="input-box">
@@ -72,7 +73,7 @@
             </form>
             <div class="new-acc">
                 <p>
-                    Already a member? <a href="login.html">Login</a>
+                    Already a member? <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
             </div>
         </div>
     </div>

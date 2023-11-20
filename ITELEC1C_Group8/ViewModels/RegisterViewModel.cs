@@ -32,7 +32,7 @@ namespace ITELEC1C_Group8.ViewModels
         public string? Email { get; set; }
 
         [Display(Name = "Phone Number")]
-        [RegularExpression("[0-9]{2}-[0-9]{3}-[0-9]{4}")]
+        [RegularExpression("[0]{1}[0-9]{3}[0-9]{3}[0-9]{4}")]
         [Required(ErrorMessage = "A phone number is required")]
         public string? Phone { get; set; }
 
