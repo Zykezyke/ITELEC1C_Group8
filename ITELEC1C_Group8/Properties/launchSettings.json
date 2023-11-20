@@ -1,20 +1,12 @@
 {
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:23866",
-      "sslPort": 44377
-    }
-  },
   "profiles": {
     "ITELEC1C_Group8": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7127;http://localhost:5136",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
+      "applicationUrl": "https://localhost:7127;http://localhost:5136",
       "dotnetRunMessages": true
     },
     "IIS Express": {
@@ -23,6 +15,14 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    }
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:23866",
+      "sslPort": 44377
     }
   }
 }
