@@ -43,6 +43,7 @@ namespace ITELEC1C_Group8.Controllers
             
             _dbData.Appointments.Add(newAppointment);
             _dbData.SaveChanges();
+            this.TempData["messages"] = "Appointment Booked";
             return RedirectToAction("Index");
         }
 

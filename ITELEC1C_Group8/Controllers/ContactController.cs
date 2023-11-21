@@ -42,6 +42,7 @@ namespace ITELEC1C_Group8.Controllers
 
             _dbData.Contacts.Add(newContact);
             _dbData.SaveChanges();
+            this.TempData["messages"] = "Message Sent!";
             return RedirectToAction("Index");
         }
 

@@ -38,6 +38,18 @@
                 <!-- Start Card Body -->
                 <div class="card-body" >
                 <div asp-validation-summary="All" class="text-danger"></div>
+                    @{
+                        if (TempData["messages"] != null)
+                        {
+                            <div class="form-row">
+                            <div>
+                                    <h1 style="color:#101F90;text-align:center;">
+                                @TempData["messages"]
+                                </h1>
+                            </div>
+                            </div>
+                        }
+                    }
                   <!-- Start Form -->
                   <form asp-action="AddApp" asp-controller="Appointment" method="post" id="bookingForm" class="needs-validation"  autocomplete="off">
                         <div class="form-row">

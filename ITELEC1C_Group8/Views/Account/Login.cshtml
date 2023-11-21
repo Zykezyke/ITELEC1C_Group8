@@ -19,25 +19,22 @@
     <link href="~/css/styleLogin.css" rel="stylesheet" />
     <link href="~/css/styles.css" rel="stylesheet" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <style>
-        body {
-            background-image: url('/assets/clinicbg.jpg');
-            background-size: cover;
-        }
-    </style>
+
 </head>
 
 <body id="page-top">
-    <div class="container d-flex align-items-center flex-column p-5 my-5" align="center">
-        <div class="bannerimg">
-            <img src="~/assets/logo.png" width="120" height="120" />
-        </div>
+    <header class="masthead" id="appointment" style="background-image: url('/assets/clinicbg.jpg'); background-size: cover;">
+        <div class="container d-flex align-items-center flex-column">
+
+
+
         
         
         <div class="loginform">
-            <div asp-validation-summary="All" class="text-danger"></div>
+                <img src="~/assets/logo.png" width="120" height="120" />
             <form asp-action="Login" asp-controller="Account">
                 <h1>Login</h1>
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="input-box">
                     <input asp-for="UserName" type="text" placeholder="Username">
                     <i class='bx bx-user'></i>
@@ -53,7 +50,21 @@
                 <p>
                     No account yet? <a asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
             </div>
+            @{
+                if (TempData["messages"] != null)
+                {
+                    <div class="form-row">
+                        <div>
+                            <h2 style="color:#101F90;text-align:center;">
+                                @TempData["messages"]
+                            </h2>
+                        </div>
+                    </div>
+                }
+            }
         </div>
+    </div>
+    </header>
     </div>
     <footer class="footer text-center">
         <div class="container">

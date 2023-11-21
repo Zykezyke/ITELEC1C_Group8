@@ -39,6 +39,18 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-xl-7">
                     <div asp-validation-summary="All" class="text-danger"></div>
+                    @{
+                        if (TempData["messages"] != null)
+                        {
+                            <div class="form-row">
+                                <div>
+                                    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">
+                                        @TempData["messages"]
+                                    </h2>
+                                </div>
+                            </div>
+                        }
+                    }
                     <form id="contactForm" asp-action="AddContact" asp-controller="Contact" method="post">
                         <!-- Message input-->
                         <div class="form-floating mb-3">

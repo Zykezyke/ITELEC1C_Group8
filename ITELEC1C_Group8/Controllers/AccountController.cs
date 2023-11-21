@@ -68,6 +68,7 @@ namespace ITELEC1C_Group8.Controllers
 
                 if (result.Succeeded)
                 {
+                    this.TempData["messages"] = "Account created, you may now login";
                     return RedirectToAction("Login", "Account");
                 }
                 else
