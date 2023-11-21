@@ -8,6 +8,7 @@ namespace ITELEC1C_Group8.Data
     public class AppDbContext : IdentityDbContext<User>
     {
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
 

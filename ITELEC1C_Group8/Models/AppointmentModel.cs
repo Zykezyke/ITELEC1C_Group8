@@ -27,12 +27,17 @@ namespace ITELEC1C_Group8.Models
 
         [NotMapped]
         [ScaffoldColumn(false)]
+        public string? FullName { get; set; }
+
+        [NotMapped]
+        [ScaffoldColumn(false)]
         public string? Phone { get; set; }
 
         public void SetUserInfo(UserManager<User> userManager, ClaimsPrincipal user)
         {
             var currentUser = userManager.GetUserAsync(user).Result;
             UserName = currentUser?.UserName;
+            FullName = currentUser?.FirstName + currentUser?.LastName;
             Phone = currentUser?.PhoneNumber;
         }
 
