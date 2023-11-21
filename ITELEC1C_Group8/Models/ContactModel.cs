@@ -10,24 +10,20 @@ namespace ITELEC1C_Group8.Models
     {
         public int ContactId { get; set; }
 
-        [NotMapped]
-        [ScaffoldColumn(false)]
-        public string? Email { get; set; }
 
-        [NotMapped]
-        [ScaffoldColumn(false)]
-        public string? FullName { get; set; }
+        public string? CEmail { get; set; }
 
-        [NotMapped]
-        [ScaffoldColumn(false)]
-        public string? Phone { get; set; }
+
+        public string? CFullName { get; set; }
+
+        public string? CPhone { get; set; }
 
         public void SetUserInfo(UserManager<User> userManager, ClaimsPrincipal user)
         {
             var currentUser = userManager.GetUserAsync(user).Result;
-            Email = currentUser?.Email;
-            FullName = currentUser?.FirstName + currentUser?.LastName;
-            Phone = currentUser?.PhoneNumber;
+            CEmail = currentUser?.Email;
+            CFullName = currentUser?.FirstName +" "+ currentUser?.LastName;
+            CPhone = currentUser?.PhoneNumber;
         }
 
         [Display(Name = "Message")]

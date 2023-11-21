@@ -21,28 +21,25 @@ namespace ITELEC1C_Group8.Models
     {
         public int AppointmentId { get; set; }
 
-        [NotMapped]
-        [ScaffoldColumn(false)]
-        public string? UserName { get; set; }
 
-        [NotMapped]
-        [ScaffoldColumn(false)]
-        public string? FullName { get; set; }
+        public string? AUserName { get; set; }
 
-        [NotMapped]
-        [ScaffoldColumn(false)]
-        public string? Phone { get; set; }
+
+        public string? AFullName { get; set; }
+
+
+        public string? APhone { get; set; }
 
         public void SetUserInfo(UserManager<User> userManager, ClaimsPrincipal user)
         {
             var currentUser = userManager.GetUserAsync(user).Result;
-            UserName = currentUser?.UserName;
-            FullName = currentUser?.FirstName + currentUser?.LastName;
-            Phone = currentUser?.PhoneNumber;
+            AUserName = currentUser?.UserName;
+            AFullName = currentUser?.FirstName + " " + currentUser?.LastName;
+            APhone = currentUser?.PhoneNumber;
         }
 
         [Display(Name = "Branch")]
-        public Branch AppBranch { get; set; }
+        public Branch Branch { get; set; }
         [Display(Name = "Doctor")]
         public Doctor Doctor { get; set; }
         [Display(Name = "Appointment Date")]

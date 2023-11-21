@@ -37,7 +37,6 @@ namespace ITELEC1C_Group8.Controllers
         [HttpPost]
         public IActionResult AddApp(Appointment newAppointment)
         {   
-            newAppointment.AppDate = DateTime.Now;
             newAppointment.SetUserInfo(_userManager, User);
             if (!ModelState.IsValid)
                 return View();

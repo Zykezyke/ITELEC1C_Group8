@@ -40,24 +40,27 @@
                 <div asp-validation-summary="All" class="text-danger"></div>
                   <!-- Start Form -->
                   <form asp-action="AddApp" asp-controller="Appointment" method="post" id="bookingForm" class="needs-validation"  autocomplete="off">
-
+                        <div class="form-row">
                     <div class="form-group">
-                        <label asp-for ="AppBranch">Clinic Branch</label>
+                        <label asp-for ="Branch">Clinic Branch</label>
                         <div class="d-flex flex-row justify-content-between align-items-center">
-                          <select asp-items="@Html.GetEnumSelectList(typeof(Branch))" asp-for="AppBranch" placeholder="Select Clinic Branch" class="form-control mr-1" id="clinic" name="clinic" required>
+                                    <select asp-for="Branch" asp-items="@Html.GetEnumSelectList(typeof(Branch))" placeholder="Select Branch" class="form-control mr-1" id="branch" name="branch" required>
+                                    <option value="">Select Clinic Branch</option>
                           </select>
                       </div>
                       <br>
                       <div class="form-group">
                         <label asp-for = "Doctor">Medical Doctor</label>
                         <div class="d-flex flex-row justify-content-between align-items-center">
-                                    <select asp-for="Doctor" asp-items="@Html.GetEnumSelectList(typeof(Doctor))" placeholder="Select Doctor" class="form-control mr-1" id="doctor" name="doctor" required>
+                                 <select asp-for="Doctor" asp-items="@Html.GetEnumSelectList(typeof(Doctor))" placeholder="Select Doctor" class="form-control mr-1" id="doctor" name="doctor" required>
+                                        <option value="">Select Doctor</option>
                           </select>
                       </div>
                 </div>
+                </div>
                 <br>
     
-                    <!-- End Input Telephone -->
+             
                  
                     <!-- Start Input Date , Start Time and End Time -->
                     <div class="form-row">
