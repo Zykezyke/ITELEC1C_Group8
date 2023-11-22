@@ -68,6 +68,8 @@ namespace ITELEC1C_Group8.Controllers
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(newUser, "User");
+
                     this.TempData["messages"] = "Account created, you may now login";
                     return RedirectToAction("Login", "Account");
                 }

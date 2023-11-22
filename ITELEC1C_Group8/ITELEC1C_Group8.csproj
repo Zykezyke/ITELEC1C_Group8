@@ -24,7 +24,4 @@
   <ItemGroup>
     <None Remove="Views\Contact\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Contact\" />
-  </ItemGroup>
 </Project>

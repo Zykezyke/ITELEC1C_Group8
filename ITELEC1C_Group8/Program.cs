@@ -52,6 +52,48 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
 
+    try
+    {
+        // Get the RoleManager and UserManager from the service provider
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        var userManager = services.GetRequiredService<UserManager<User>>();
 
-app.Run();
+        // Your logic for creating roles and the admin user goes here
+        string[] roleNames = { "Admin", "User" };
+        foreach (var roleName in roleNames)
+        {
+            if (!roleManager.RoleExistsAsync(roleName).Result)
+            {
+                roleManager.CreateAsync(new IdentityRole(roleName)).Wait();
+            }
+        }
+
+        string adminEmail = "admin@example.com";
+        var adminUser = userManager.FindByEmailAsync(adminEmail).Result;
+        if (adminUser == null)
+        {
+            adminUser = new User
+            {
+                UserName = "Admin",
+                Email = adminEmail,
+            };
+            var result = userManager.CreateAsync(adminUser, "YourAdminPassword").Result;
+
+            if (result.Succeeded)
+            {
+                userManager.AddToRoleAsync(adminUser, "Admin").Wait();
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        // Log the error or handle it as needed
+        Console.WriteLine(ex.Message);
+    }
+}
+
+    app.Run();
