@@ -91,6 +91,10 @@
   }
 }
 
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
