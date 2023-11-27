@@ -80,8 +80,11 @@ using (var scope = app.Services.CreateScope())
             {
                 UserName = "Admin",
                 Email = adminEmail,
+                FirstName = "Admin",
+                LastName = "Admin",
+                PhoneNumber = "Admin"
             };
-            var result = userManager.CreateAsync(adminUser, "YourAdminPassword").Result;
+            var result = userManager.CreateAsync(adminUser, "Admin@2930").Result;
 
             if (result.Succeeded)
             {
@@ -96,4 +99,4 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-    app.Run();
+app.Run();

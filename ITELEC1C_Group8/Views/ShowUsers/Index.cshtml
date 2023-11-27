@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Services Page";
 }
+@model List<ITELEC1C_Group8.Data.User>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,41 +50,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach(var user in Model)
+                        {
                     <tr>
-                        <th scope="row">..</th>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
+                        
+                        <th scope="row">@user.UserName</th>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Email</td>
+                        <td>@user.PhoneNumber</td>
+                     
                     </tr>
-                    <tr>
-                        <th scope="row">..</th>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">..</th>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">..</th>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">..</th>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                    </tr>
+                        }
                 </tbody>
             </table>
             <br />
