@@ -46,6 +46,11 @@ namespace ITELEC1C_Group8.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult ShowContact()
+        {
+            return View();
+        }
+
 
 
     }
