@@ -82,7 +82,7 @@ using (var scope = app.Services.CreateScope())
                 Email = adminEmail,
                 FirstName = "Admin",
                 LastName = "Admin",
-                PhoneNumber = "Admin"
+                PhoneNumber = "09179873357"
             };
             var result = userManager.CreateAsync(adminUser, "Admin@2930").Result;
 

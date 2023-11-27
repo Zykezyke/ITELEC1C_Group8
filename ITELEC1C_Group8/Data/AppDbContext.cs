@@ -11,7 +11,7 @@ namespace ITELEC1C_Group8.Data
         public DbSet<Contact> Contacts { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-
+ 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
