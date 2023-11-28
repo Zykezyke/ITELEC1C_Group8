@@ -63,7 +63,7 @@ using (var scope = app.Services.CreateScope())
         var userManager = services.GetRequiredService<UserManager<User>>();
 
         // Your logic for creating roles and the admin user goes here
-        string[] roleNames = { "Admin", "User" };
+        string[] roleNames = { "Admin", "User", "Doctor" };
         foreach (var roleName in roleNames)
         {
             if (!roleManager.RoleExistsAsync(roleName).Result)

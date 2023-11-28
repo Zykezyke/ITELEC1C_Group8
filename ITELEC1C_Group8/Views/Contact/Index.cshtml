@@ -93,6 +93,10 @@
                     <div class="card-body text-info">
                         <h5 class="card-title">@contactItem.CEmail</h5>
                         <p class="card-text">@contactItem.Message</p>
+                                                    <form method="post" asp-action="Delete" asp-controller="Contact">
+                                <input type="hidden" name="contactId" value="@contactItem.ContactId" />
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                     </div>
                 </div>
             </div>

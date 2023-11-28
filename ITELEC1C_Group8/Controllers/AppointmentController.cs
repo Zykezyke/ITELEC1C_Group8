@@ -20,7 +20,7 @@ namespace ITELEC1C_Group8.Controllers
 
 
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult Index()
         {
             return View();

@@ -29,6 +29,18 @@
     <div class="container p-5">
         <br />
         <br />
+                    @{
+                if (TempData["messages"] != null)
+                {
+
+                    <div>
+                        <h2 style="color:#101F90;text-align:center;">
+                            @TempData["messages"]
+                        </h2>
+                    </div>
+                    <br />
+                }
+            }
             <br />
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contacts List</h2>
             <!-- Icon Divider-->
@@ -60,6 +72,10 @@
                 <div class="card-body text-info">
                     <h5 class="card-title">@Model[i].CEmail</h5>
                     <p class="card-text">@Model[i].Message</p>
+                            <form method="post" asp-action="Delete" asp-controller="Contact">
+                                <input type="hidden" name="contactId" value="@Model[i].ContactId" />
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                 </div>
             </div>
         </div>

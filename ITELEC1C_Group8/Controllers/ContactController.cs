@@ -20,7 +20,7 @@ namespace ITELEC1C_Group8.Controllers
 
 
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult Index()
         {
             var userId = _userManager.GetUserId(User);
@@ -35,7 +35,7 @@ namespace ITELEC1C_Group8.Controllers
             return View(viewModel);
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         [HttpGet]
         public IActionResult AddContact()
         {
@@ -53,6 +53,39 @@ namespace ITELEC1C_Group8.Controllers
             _dbData.SaveChanges();
             this.TempData["messages"] = "Message Sent!";
             return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Delete(int contactId)
+        {
+            var contactToDelete = _dbData.Contacts.Find(contactId);
+
+            if (contactToDelete != null)
+            {
+                _dbData.Contacts.Remove(contactToDelete);
+                _dbData.SaveChanges();
+                TempData["messages"] = "Contact deleted successfully.";
+            }
+            else
+            {
+                TempData["messages"] = "Contact not found.";
+            }
+
+            // Get the current user's roles
+            var roles = _userManager.GetRolesAsync(_userManager.GetUserAsync(User).Result).Result;
+
+            // Check if the user has the "Admin" role
+            if (roles.Contains("Admin"))
+            {
+
+                return RedirectToAction("ShowContact");
+            }
+            else
+            {
+  
+                return RedirectToAction("Index");
+            }
         }
 
         [Authorize(Roles = "Admin")]
