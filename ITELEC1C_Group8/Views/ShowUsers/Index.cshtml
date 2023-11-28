@@ -28,6 +28,19 @@
     <!-- Services Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container p-5">
+            @{
+                if (TempData["messages"] != null)
+                {
+
+                    <div>
+                        <h2 style="color:#101F90;text-align:center;">
+                            @TempData["messages"]
+                        </h2>
+                    </div>
+                    <br />
+                }
+            }
+            <a class="btn btn-success" asp-area="" asp-controller="Account" asp-action="Create">Add New User</a>
             <!-- Services Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">User Details</h2>
             <!-- Icon Divider-->
@@ -37,19 +50,9 @@
                 <!--<div class="divider-custom-icon"><i class="fas fa-star"></i></div>-->
                 <div class="divider-custom-line"></div>
             </div> 
-            <br />
-            @{
-                if (TempData["messages"] != null)
-                {
 
-                        <div>
-                            <h2 style="color:#101F90;text-align:center;">
-                                @TempData["messages"]
-                            </h2>
-                        </div>
-                        <br/>
-                }
-            }
+            <br />
+
             
             <!-- Services Grid Items-->
                 <table class="table table-striped">
@@ -172,6 +175,7 @@
                             <td>@user.Email</td>
                             <td>@user.PhoneNumber</td>
                             <td><a class="btn btn-primary" asp-controller="Account" asp-action="Update" asp-route-id="@user.Id">Update Details</a></td>
+                            <td><a class="btn btn-danger" asp-controller="Account" asp-action="Delete" asp-route-id="@user.Id">Delete User</a></td>
                         </tr>
                     }
                 </tbody>

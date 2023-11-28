@@ -88,6 +88,48 @@ namespace ITELEC1C_Group8.Controllers
             return View(userEnteredData);
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateViewModel userEnteredData)
+        {
+            if (ModelState.IsValid)
+            {
+                User newUser = new User
+                {
+                    UserName = userEnteredData.UserName,
+                    FirstName = userEnteredData.FirstName,
+                    LastName = userEnteredData.LastName,
+                    Email = userEnteredData.Email,
+                    PhoneNumber = userEnteredData.Phone
+                };
+
+                var result = await _userManager.CreateAsync(newUser, userEnteredData.Password);
+
+                if (result.Succeeded)
+                {
+                    // Assign the selected role to the new user
+                    await _userManager.AddToRoleAsync(newUser, userEnteredData.Role);
+
+                    TempData["messages"] = "Account created successfully.";
+                    return RedirectToAction("Index", "ShowUsers");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                        ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            return View(userEnteredData);
+        }
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Update(string id)
         {
@@ -144,6 +186,7 @@ namespace ITELEC1C_Group8.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Delete(string id)
         {
