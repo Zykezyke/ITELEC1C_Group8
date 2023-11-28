@@ -34,6 +34,7 @@ namespace ITELEC1C_Group8.Controllers
 
             // Separate users into two lists based on role
             List<User> regularUsers = new List<User>();
+            List<User> doctorUsers = new List<User>();
             List<User> adminUsers = new List<User>();
 
             foreach (var user in allUsers)
@@ -42,15 +43,20 @@ namespace ITELEC1C_Group8.Controllers
                 {
                     adminUsers.Add(user);
                 }
-                else
+                else if (await _userManager.IsInRoleAsync(user, "User"))
                 {
                     regularUsers.Add(user);
+                }
+                else if (await _userManager.IsInRoleAsync(user, "Doctor"))
+                {
+                    doctorUsers.Add(user);
                 }
             }
 
             // You can pass both lists to the view or use ViewData
             ViewData["RegularUsers"] = regularUsers;
             ViewData["AdminUsers"] = adminUsers;
+            ViewData["DoctorUsers"] = doctorUsers;
 
             return View();
         }

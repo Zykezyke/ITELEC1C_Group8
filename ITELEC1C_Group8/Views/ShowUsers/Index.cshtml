@@ -4,6 +4,7 @@
 @{
     var regularUsers = ViewData["RegularUsers"] as List<ITELEC1C_Group8.Data.User>;
     var adminUsers = ViewData["AdminUsers"] as List<ITELEC1C_Group8.Data.User>;
+    var doctorUsers = ViewData["DoctorUsers"] as List<ITELEC1C_Group8.Data.User>;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -104,41 +105,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                 @foreach (var user in doctorUsers)
+                        {
                     <tr>
-                        <th scope="row">.</th>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
                         
+                        <th scope="row">@user.UserName</th>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Email</td>
+                        <td>@user.PhoneNumber</td>
+                        <td><a class="btn btn-primary" asp-controller="Account" asp-action="Update" asp-route-id="@user.Id">Update Details</a></td>
+                            <td><a class="btn btn-danger" asp-controller="Account" asp-action="Delete" asp-route-id="@user.Id">Delete User</a></td>
                     </tr>
-                    <tr>
-                        <th scope="row">.</th>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                        
-                    </tr>
-                    <tr>
-                        <th scope="row">.</th>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                        
-                    </tr>
-                    <tr>
-                        <th scope="row">.</th>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                        
-                    </tr>
-                    <tr>
-                        <th scope="row">.</th>
-                        <td>..</td>
-                        <td>..</td>
-                        <td>..</td>
-                        
-                    </tr>
+                    }
                 </tbody>
             </table>
             <br />

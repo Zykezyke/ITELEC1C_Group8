@@ -38,5 +38,6 @@ namespace ITELEC1C_Group8.ViewModels
         public string? Phone { get; set; }
 
         public string? Role { get; set; }
+
     }
 }
