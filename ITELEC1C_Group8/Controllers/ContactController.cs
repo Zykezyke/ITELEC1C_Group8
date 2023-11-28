@@ -1,5 +1,6 @@
 ﻿using ITELEC1C_Group8.Data;
 using ITELEC1C_Group8.Models;
+using ITELEC1C_Group8.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,11 +23,19 @@ namespace ITELEC1C_Group8.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+            var userId = _userManager.GetUserId(User);
+            var userContacts = _dbData.Contacts.Where(c => c.UserId == userId).ToList();
+
+            var viewModel = new ContactViewModel
+            {
+                Contacts = userContacts,
+                NewContact = new Contact()
+            };
+
+            return View(viewModel);
         }
 
-
-
+        [Authorize]
         [HttpGet]
         public IActionResult AddContact()
         {
@@ -46,9 +55,11 @@ namespace ITELEC1C_Group8.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult ShowContact()
         {
-            return View();
+            var contacts = _dbData.Contacts.ToList(); // Retrieve all contacts from the database
+            return View(contacts);
         }
 
 

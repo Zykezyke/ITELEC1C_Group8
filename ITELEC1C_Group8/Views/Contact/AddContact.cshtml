@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Contact Page";
 }
-@model ContactViewModel
+@model Contact
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,102 +14,48 @@
     <meta name="author" content="" />
     <title>Addicure</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/logo.png" />
+    <link rel="icon" type="image/x-icon" href="~/assets/logo.png" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" />
 </head>
 <body id="page-top" style="background-color:#E5F0FF;">
     <!-- Contact Section-->
     <section class="page-section my-5" id="contact">
         <div class="container">
-                          <br />
+            <br />
             <!-- Contact Section Heading-->
-            <div class="text-center">
-                    <a class="btn btn-xl btn-dark" asp-area="" asp-controller="Contact" asp-action="AddContact">Contact Us</a>
-            </div>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Us</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-                       @{
-                        if (TempData["messages"] != null)
-                        {
-                            <div class="form-row">
-                                <div>
-                                    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">
-                                        @TempData["messages"]
-                                    </h2>
-                                </div>
-                            </div>
-                                          <br />
-        <br />
-                        }
-                    }
+            <!-- Contact Section Form-->
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-7">
+                    <div asp-validation-summary="All" class="text-danger"></div>
 
-
-                </div>
-
-        <br />
-            <br />
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Messages List</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-line"></div>
-                <!--<div class="divider-custom-icon"><i class="fas fa-star"></i></div>-->
-                <div class="divider-custom-line"></div>
-            </div>
-            <br />
-            <!-- Services Grid Items-->
-<br />
-<!-- Services Grid Items -->
-
-@if (Model.Contacts != null && Model.Contacts.Any()) // Check if there are contacts to display
-{
-    <div class="container">
-        @foreach (var contact in Model.Contacts.Select((value, index) => new { Value = value, Index = index }))
-        {
-            if (contact.Index % 3 == 0)
-            {
-                if (contact.Index > 0)
-                {
-                    @:</div> <!-- Close the previous row if not the first row -->
-                }
-                @:<div class="row">
-            }
-
-            var contactItem = contact.Value; // Extract the value for cleaner references
-
-            <div class="col-md-4">
-                <div class="card border-info mb-3">
-                    <div class="card-header">@contactItem.CFullName</div>
-                    <div class="card-body text-info">
-                        <h5 class="card-title">@contactItem.CEmail</h5>
-                        <p class="card-text">@contactItem.Message</p>
-                    </div>
+                    <form id="contactForm" asp-action="AddContact" asp-controller="Contact" method="post">
+                        <!-- Message input-->
+                        <div class="form-floating mb-3">
+                            <textarea asp-for = "Message" class="form-control" style="background-color:#E5F0FF;" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem"></textarea>
+                            <label asp-for="Message">Message</label>
+                        </div>
+                        <!-- Submit Button-->
+                        <button class="btn btn-primary btn-xl" id="submitButton" type="submit" value="submit">Send</button>
+                    </form>
                 </div>
             </div>
-
-            @if (contact.Index == Model.Contacts.Count() - 1)
-            {
-                @:</div> <!-- Close the last row -->
-            }
-        }
-    </div>
-}
-else
-{
-    <div class="container">
-     <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">No contacts found for the current user.</h2>
-     </div>
-}
+            <div class="text-center">
+                <a class="btn btn-sm btn-primary" asp-area="" asp-controller="Contact" asp-action="Index">Go back</a>
+            </div>
+        </div>
     </section>
     <!-- Footer-->
     <footer class="footer text-center">

@@ -2,9 +2,9 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Contact Page";
+    ViewData["Title"] = "Signup Page";
 }
-@model List<Contact>
+@model UpdateViewModel;
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,69 +12,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Addicure</title>
+    <title>Sign up - Addicure</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="~/assets/logo.png" />
+    <link rel="icon" type="image/x-icon" src="~/assets/logo.png" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="~/css/styles.css" rel="stylesheet" />
-</head>
-    <body id="page-top">
-<!-- Services Section-->
-    <section class="page-section" style="background-color:#E5F0FF; color:#101F90;" id="contact">
-    <div class="container p-5">
-        <br />
-        <br />
-            <br />
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contacts List</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-line"></div>
-                <!--<div class="divider-custom-icon"><i class="fas fa-star"></i></div>-->
-                <div class="divider-custom-line"></div>
-            </div>
-            <br />
-            <!-- Services Grid Items-->
-
-<div class="container">
-    @for (int i = 0; i < Model.Count; i++)
-    {
-        if (i % 3 == 0)
-        {
-            // Create a new row for every 3 contacts
-            if (i > 0)
-            {
-                @:</div> <!-- Close the previous row if not the first row -->
-            }
-            @:<div class="row">
+    <link rel="stylesheet" type="text/css" href="~/css/styleSignup.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="~/css/styles.css" media="screen" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body {
+            background-image: url('/assets/clinicbg.jpg');
+            background-size: cover;
         }
+    </style>
+</head>
 
-        <div class="col-md-4">
-            <div class="card border-info mb-3">
-                <div class="card-header">@Model[i].CFullName</div>
-                <div class="card-body text-info">
-                    <h5 class="card-title">@Model[i].CEmail</h5>
-                    <p class="card-text">@Model[i].Message</p>
+<body id="page-top">
+    <header class="masthead" id="appointment" style="background-image: url('/assets/clinicbg.jpg'); background-size: cover;">
+        <div class="container d-flex align-items-center flex-column">
+
+
+            <div class="signupform">
+
+                <img src="~/assets/logo.png" width="120" height="120" />
+                <form asp-action="Update" asp-controller="Account" method="post">
+                    <h1>Sign Up</h1>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input asp-for="UserId" type="hidden" />
+                    <div class="input-box">
+                        <input asp-for="UserName" placeholder="Enter Username">
+                        <i class='bx bx-user'></i>
+                    </div>
+                    <div class="input-box">
+                        <input asp-for="FirstName" placeholder="Enter First Name">
+                        <i class='bx bx-lock-alt'></i>
+                    </div>
+                    <div class="input-box">
+                        <input asp-for="LastName" placeholder="Enter Last Name">
+                        <i class='bx bx-lock-alt'></i>
+                    </div>
+                    <div class="input-box">
+                        <input asp-for="Email" placeholder="Email Address">
+                        <i class='bx bx-lock-alt'></i>
+                    </div>
+                    <div class="input-box">
+                        <input asp-for="Phone" placeholder="Phone Number">
+                        <i class='bx bx-lock-alt'></i>
+                    </div>
+
+                    <button type="submit" class="btn" value="Submit">Update User</button>
+                </form>
+                <div class="new-acc">
+
+                       <a asp-area="" asp-controller="ShowUsers" asp-action="Index">Go Back</a>
                 </div>
             </div>
         </div>
-
-        @if (i == Model.Count - 1)
-        {
-            @:</div> <!-- Close the last row -->
-        }
-    }
-</div>
-
-
-        </section>
-
- <!-- Footer-->
+    </header>
+    </div>
     <footer class="footer text-center">
         <div class="container">
             <div class="row">
