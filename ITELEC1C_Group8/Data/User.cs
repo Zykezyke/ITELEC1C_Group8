@@ -8,4 +8,8 @@ namespace ITELEC1C_Group8.Data
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
+    public class AdminAccount : IdentityUser
+    {
+        public int AdminID { get; set; }
+    }
 }

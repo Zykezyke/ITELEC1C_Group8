@@ -33,6 +33,8 @@ namespace ITELEC1C_Group8.Controllers
             }
             else
             {
+                Console.WriteLine($"Login failed for user: {loginInfo.UserName}");
+                Console.WriteLine($"Result: {result}");
                 ModelState.AddModelError("", "Failed to Login");
             }
 
