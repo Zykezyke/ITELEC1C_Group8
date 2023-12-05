@@ -100,21 +100,44 @@ namespace ITELEC1C_Group8.Controllers
         {
             if (ModelState.IsValid)
             {
-                User newUser = new User
-                {
-                    UserName = userEnteredData.UserName,
-                    FirstName = userEnteredData.FirstName,
-                    LastName = userEnteredData.LastName,
-                    Email = userEnteredData.Email,
-                    PhoneNumber = userEnteredData.Phone
-                };
+                IdentityResult result;
 
-                var result = await _userManager.CreateAsync(newUser, userEnteredData.Password);
+                if (userEnteredData.Role == "Doctor")
+                {
+                    // Create a Doctor object
+                    Doctor newDoctor = new Doctor
+                    {
+                        UserName = userEnteredData.UserName,
+                        FirstName = userEnteredData.FirstName,
+                        LastName = userEnteredData.LastName,
+                        Email = userEnteredData.Email,
+                        PhoneNumber = userEnteredData.Phone,
+                        Branch = userEnteredData.Branch.Value
+                    };
+
+                    result = await _userManager.CreateAsync(newDoctor, userEnteredData.Password);
+                }
+                else
+                {
+                    // Create a regular User object
+                    User newUser = new User
+                    {
+                        UserName = userEnteredData.UserName,
+                        FirstName = userEnteredData.FirstName,
+                        LastName = userEnteredData.LastName,
+                        Email = userEnteredData.Email,
+                        PhoneNumber = userEnteredData.Phone
+                    };
+
+                    result = await _userManager.CreateAsync(newUser, userEnteredData.Password);
+                }
 
                 if (result.Succeeded)
                 {
+                    var createdUser = await _userManager.FindByNameAsync(userEnteredData.UserName);
+
                     // Assign the selected role to the new user
-                    await _userManager.AddToRoleAsync(newUser, userEnteredData.Role);
+                    await _userManager.AddToRoleAsync(createdUser, userEnteredData.Role);
 
                     TempData["messages"] = "Account created successfully.";
                     return RedirectToAction("Index", "ShowUsers");

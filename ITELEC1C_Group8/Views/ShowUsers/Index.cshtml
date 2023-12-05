@@ -4,7 +4,7 @@
 @{
     var regularUsers = ViewData["RegularUsers"] as List<ITELEC1C_Group8.Data.User>;
     var adminUsers = ViewData["AdminUsers"] as List<ITELEC1C_Group8.Data.User>;
-    var doctorUsers = ViewData["DoctorUsers"] as List<ITELEC1C_Group8.Data.User>;
+    var doctorUsers = ViewData["DoctorUsers"] as List<ITELEC1C_Group8.Data.Doctor>;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -62,24 +62,35 @@
                         <th scope="col">Username</th>
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
-                        <th scope="col">Email Address </th>
-                        <th scope="col">Phone Number </th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var user in regularUsers)
+                    @if (regularUsers != null)
+                    {
+                        @foreach (var user in regularUsers)
                         {
-                    <tr>
-                        
-                        <th scope="row">@user.UserName</th>
-                        <td>@user.FirstName</td>
-                        <td>@user.LastName</td>
-                        <td>@user.Email</td>
-                        <td>@user.PhoneNumber</td>
-                        <td><a class="btn btn-primary" asp-controller="Account" asp-action="Update" asp-route-id="@user.Id">Update Details</a></td>
-                            <td><a class="btn btn-danger" asp-controller="Account" asp-action="Delete" asp-route-id="@user.Id">Delete User</a></td>
-                    </tr>
+                            <tr>
+                                <td>@user.UserName</td>
+                                <td>@user.FirstName</td>
+                                <td>@user.LastName</td>
+                                <td>@user.Email</td>
+                                <td>@user.PhoneNumber</td>
+                                <td><a class="btn btn-primary" asp-controller="Account" asp-action="Update" asp-route-id="@user.Id">Update Details</a></td>
+                                <td><a class="btn btn-danger" asp-controller="Account" asp-action="Delete" asp-route-id="@user.Id">Delete User</a></td>
+                            </tr>
                         }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7">No regular users found.</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
             <br />
@@ -98,25 +109,38 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Clinic Branch</th>
-                        <th scope="col">Doctor Name</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
                         <th scope="col">Email Address </th>
                         <th scope="col">Phone Number </th>
+                        <th scope="col">Clinic Branch</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                 @foreach (var user in doctorUsers)
+                    @if (doctorUsers != null)
+                    {
+                        foreach (var doctor in doctorUsers)
                         {
-                    <tr>
-                        
-                        <th scope="row">@user.UserName</th>
-                        <td>@user.FirstName</td>
-                        <td>@user.LastName</td>
-                        <td>@user.Email</td>
-                        <td>@user.PhoneNumber</td>
-                        <td><a class="btn btn-primary" asp-controller="Account" asp-action="Update" asp-route-id="@user.Id">Update Details</a></td>
-                            <td><a class="btn btn-danger" asp-controller="Account" asp-action="Delete" asp-route-id="@user.Id">Delete User</a></td>
-                    </tr>
+                            <tr>
+                                <td>@doctor.UserName</td>
+                                <td>@doctor.FirstName</td>
+                                <td>@doctor.LastName</td>
+                                <td>@doctor.Email</td>
+                                <td>@doctor.PhoneNumber</td>
+                                <td>@doctor.Branch</td>
+                                <td><a class="btn btn-primary" asp-controller="Account" asp-action="Update" asp-route-id="@doctor.Id">Update Details</a></td>
+                                <td><a class="btn btn-danger" asp-controller="Account" asp-action="Delete" asp-route-id="@doctor.Id">Delete User</a></td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8">No doctor users found.</td>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -141,20 +165,30 @@
                         <th scope="col">Last Name</th>
                         <th scope="col">Email Address </th>
                         <th scope="col">Phone Number </th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var user in adminUsers)
+                    @if (adminUsers != null)
+                    {
+                        @foreach (var user in adminUsers)
+                        {
+                            <tr>
+                                <td>@user.UserName</td>
+                                <td>@user.FirstName</td>
+                                <td>@user.LastName</td>
+                                <td>@user.Email</td>
+                                <td>@user.PhoneNumber</td>
+                                <td><a class="btn btn-primary" asp-controller="Account" asp-action="Update" asp-route-id="@user.Id">Update Details</a></td>
+                                <td><a class="btn btn-danger" asp-controller="Account" asp-action="Delete" asp-route-id="@user.Id">Delete User</a></td>
+                            </tr>
+                        }
+                    }
+                    else
                     {
                         <tr>
-
-                            <th scope="row">@user.UserName</th>
-                            <td>@user.FirstName</td>
-                            <td>@user.LastName</td>
-                            <td>@user.Email</td>
-                            <td>@user.PhoneNumber</td>
-                            <td><a class="btn btn-primary" asp-controller="Account" asp-action="Update" asp-route-id="@user.Id">Update Details</a></td>
-                            <td><a class="btn btn-danger" asp-controller="Account" asp-action="Delete" asp-route-id="@user.Id">Delete User</a></td>
+                            <td colspan="7">No admin users found.</td>
                         </tr>
                     }
                 </tbody>

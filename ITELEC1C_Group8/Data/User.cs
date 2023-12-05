@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using ITELEC1C_Group8.Enums;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITELEC1C_Group8.Data
@@ -8,8 +9,9 @@ namespace ITELEC1C_Group8.Data
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
-    public class AdminAccount : IdentityUser
+
+    public class Doctor : User
     {
-        public int AdminID { get; set; }
+        public Branch Branch { get; set; }
     }
 }

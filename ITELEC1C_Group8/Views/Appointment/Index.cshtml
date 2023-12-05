@@ -7,6 +7,7 @@
     
 }
 @model Appointment;
+@using ITELEC1C_Group8.Enums;
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,6 +20,7 @@
         <link rel="icon" type="image/x-icon" href="~/assets/logo.png" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
@@ -53,23 +55,51 @@
                   <!-- Start Form -->
                   <form asp-action="AddApp" asp-controller="Appointment" method="post" id="bookingForm" class="needs-validation"  autocomplete="off">
                         <div class="form-row">
-                    <div class="form-group">
-                        <label asp-for ="Branch">Clinic Branch</label>
-                        <div class="d-flex flex-row justify-content-between align-items-center">
-                                    <select asp-for="Branch" asp-items="@Html.GetEnumSelectList(typeof(Branch))" placeholder="Select Branch" class="form-control mr-1" id="branch" name="branch" required>
-                                    <option value="">Select Clinic Branch</option>
-                          </select>
-                      </div>
-                      <br>
-                      <div class="form-group">
-                        <label asp-for = "Doctor">Medical Doctor</label>
-                        <div class="d-flex flex-row justify-content-between align-items-center">
-                                 <select asp-for="Doctor" asp-items="@Html.GetEnumSelectList(typeof(Doctor))" placeholder="Select Doctor" class="form-control mr-1" id="doctor" name="doctor" required>
+                            <div class="form-group">
+                                <label asp-for="SelectedBranch">Clinic Branch</label>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <select asp-for="SelectedBranch" asp-items="@Html.GetEnumSelectList(typeof(Branch))" placeholder="Select Branch" class="form-control mr-1" id="branch" name="branch" required>
+                                        <option value="">Select Clinic Branch</option>
+                                    </select>
+                                </div>
+
+                            <div class="form-group">
+                                <label asp-for="SelectedDoctor">Medical Doctor</label>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <select asp-for="SelectedDoctor" placeholder="Select Doctor" class="form-control mr-1" id="doctor" name="doctor" required>
                                         <option value="">Select Doctor</option>
-                          </select>
-                      </div>
-                </div>
-                </div>
+                                    </select>
+                                </div>
+                            </div>
+
+                            @section scripts {
+                                <script>
+                                    // Use jQuery to handle the change event of the branch dropdown
+                                    $("#branch").change(function () {
+                                        var selectedBranch = $(this).val();
+
+                                        // Make an AJAX request to the server to get doctors based on the selected branch
+                                        $.ajax({
+                                            url: '/Appointment/GetDoctorsByBranch',
+                                            type: 'GET',
+                                            data: { selectedBranch: selectedBranch },
+                                            success: function (data) {
+                                                // Populate the doctors dropdown with the received data
+                                                var doctorsDropdown = $("#doctor");
+                                                doctorsDropdown.empty();
+                                                doctorsDropdown.append($('<option>').text('Select Doctor').attr('value', ''));
+                                                $.each(data, function (index, item) {
+                                                    doctorsDropdown.append($('<option>').text(item.text).attr('value', item.value));
+                                                });
+                                            },
+                                            error: function (error) {
+                                                console.log(error);
+                                            }
+                                        });
+                                    });
+                                </script>
+                            }
+                    </div>
                 <br>
     
              

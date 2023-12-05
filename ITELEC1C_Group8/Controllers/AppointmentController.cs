@@ -1,8 +1,10 @@
 ﻿using ITELEC1C_Group8.Data;
+using ITELEC1C_Group8.Enums;
 using ITELEC1C_Group8.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 
 namespace ITELEC1C_Group8.Controllers
@@ -18,6 +20,17 @@ namespace ITELEC1C_Group8.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet]
+        public IActionResult GetDoctorsByBranch(Branch selectedBranch)
+        {
+            var doctors = _dbData.Doctors.Where(d => d.Branch == selectedBranch).ToList();
+            var doctorList = doctors.Select(d => new SelectListItem
+            {
+                Text = d.FirstName + " " + d.LastName,
+                Value = d.UserName
+            }).ToList();
+            return Json(doctorList);
+        }
 
 
         [Authorize(Roles = "User")]

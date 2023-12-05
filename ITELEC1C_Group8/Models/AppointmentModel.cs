@@ -4,19 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
+using ITELEC1C_Group8.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ITELEC1C_Group8.Models
 {
-    public enum Branch
-    {
-        Branch1, Branch2, Branch3, Branch4, Branch5
-    }
-
-    public enum Doctor
-    {
-        Doc1, Doc2, Doc3, Doc4, Doc5
-    }
-
     public class Appointment
     {
         public int AppointmentId { get; set; }
@@ -39,9 +31,11 @@ namespace ITELEC1C_Group8.Models
         }
 
         [Display(Name = "Branch")]
-        public Branch Branch { get; set; }
+        public Branch SelectedBranch { get; set; }
+
         [Display(Name = "Doctor")]
-        public Doctor Doctor { get; set; }
+        public string SelectedDoctor { get; set; }
+
         [Display(Name = "Appointment Date")]
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Please Set A Date")]

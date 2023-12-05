@@ -34,7 +34,7 @@ namespace ITELEC1C_Group8.Controllers
 
             // Separate users into two lists based on role
             List<User> regularUsers = new List<User>();
-            List<User> doctorUsers = new List<User>();
+            List<Doctor> doctorUsers = new List<Doctor>();
             List<User> adminUsers = new List<User>();
 
             foreach (var user in allUsers)
@@ -49,7 +49,7 @@ namespace ITELEC1C_Group8.Controllers
                 }
                 else if (await _userManager.IsInRoleAsync(user, "Doctor"))
                 {
-                    doctorUsers.Add(user);
+                    doctorUsers.Add((Doctor)user);
                 }
             }
 
