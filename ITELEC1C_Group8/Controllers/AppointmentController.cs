@@ -34,13 +34,6 @@ namespace ITELEC1C_Group8.Controllers
 
 
         [Authorize(Roles = "User")]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-
-        
         [HttpGet]
         public IActionResult AddApp()
         {
@@ -53,11 +46,13 @@ namespace ITELEC1C_Group8.Controllers
             newAppointment.SetUserInfo(_userManager, User);
             if (!ModelState.IsValid)
                 return View();
-            
+
+
+            var doctorValue = ModelState["SelectedDoctor"]?.AttemptedValue;
             _dbData.Appointments.Add(newAppointment);
             _dbData.SaveChanges();
             this.TempData["messages"] = "Appointment Booked";
-            return RedirectToAction("Index");
+            return RedirectToAction("AddApp", "Appointment");
         }
 
         

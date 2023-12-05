@@ -92,18 +92,26 @@
                       </div>
 
                     <script>
-                        // Add script to show/hide Clinic Branch input based on selected role
                         document.addEventListener('DOMContentLoaded', function () {
                             var clinicBranchInput = document.getElementById('clinicBranchInput');
+                            var branchSelect = document.getElementById('branch');
                             var roleSelect = document.getElementById('roleSelect');
 
-                            if (roleSelect.value !== 'Doctor') {
-                                clinicBranchInput.style.display = 'none';
+                            function updateClinicBranchInput() {
+                                if (roleSelect.value !== 'Doctor') {
+                                    clinicBranchInput.style.display = 'none';
+                                    branchSelect.removeAttribute('required');
+                                } else {
+                                    clinicBranchInput.style.display = 'block';
+                                    branchSelect.setAttribute('required', 'required');
+                                }
                             }
 
-                            roleSelect.addEventListener('change', function () {
-                                clinicBranchInput.style.display = (this.value === 'Doctor') ? 'block' : 'none';
-                            });
+                            // Initial setup
+                            updateClinicBranchInput();
+
+                            // Update on role change
+                            roleSelect.addEventListener('change', updateClinicBranchInput);
                         });
                     </script>
 
