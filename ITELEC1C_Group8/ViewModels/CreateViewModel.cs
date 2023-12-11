@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using ITELEC1C_Group8.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ITELEC1C_Group8.ViewModels
 {
@@ -42,6 +43,11 @@ namespace ITELEC1C_Group8.ViewModels
 
         [Display(Name = "Branch")]
         public Branch? Branch { get; set; }
+        [NotMapped]
+        public IFormFile? DoctorPfp { get; set; }
+
+        [Display(Name = "Profile Picture")]
+        public string? imagePath { get; set; }
 
     }
 }

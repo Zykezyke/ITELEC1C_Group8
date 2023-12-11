@@ -24,4 +24,8 @@
   <ItemGroup>
     <None Remove="Views\Contact\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\doctors\images\" />
+  </ItemGroup>
 </Project>
