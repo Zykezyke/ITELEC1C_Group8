@@ -71,35 +71,33 @@
         <div class="card-header">@Model[i].AFullName</div>
         <div class="card-body text-info">
             <h5 class="card-title">@Model[i].AUserName</h5>
-                    <p class="text-black">Doctor: @Model[i].SelectedDoctor</p>
-                    <p class="text-black">Branch: @Model[i].SelectedBranch</p>
-                    <p class="text-black">Date: @Model[i].AppDate</p>
-                    <p class="text-black">Notes: @Model[i].Notes</p>
-                     @{
-        if (i < Model.Count)
+<p class="text-black"><strong>Doctor:</strong> @Model[i].SelectedDoctor</p>
+<p class="text-black"><strong>Branch:</strong> @Model[i].SelectedBranch</p>
+<p class="text-black"><strong>Date:</strong> @Model[i].AppDate</p>
+<p class="text-black"><strong>Notes:</strong> @Model[i].Notes</p>
+@{
+    if (i < Model.Count)
+    {
+        if (Model[i].Status == AppointmentStatus.Confirmed)
         {
-            if (Model[i].Status == AppointmentStatus.Confirmed)
-            {
-                <p class="text-bg-success text-white p-1"> Status: @Model[i].Status</p>
-            }
-            else if (Model[i].Status == AppointmentStatus.Declined)
-            {
-                <p class="text-bg-danger text-black p-1"> Status: @Model[i].Status</p>
-            }
-            else
-            {
-               <p class="text-bg-info text-black p-1"> Status: @Model[i].Status</p>
-            }
+            <p class="text-bg-success text-white p-1"><strong>Status:</strong> @Model[i].Status</p>
+        }
+        else if (Model[i].Status == AppointmentStatus.Declined)
+        {
+            <p class="text-bg-danger text-black p-1"><strong>Status:</strong> @Model[i].Status</p>
+        }
+        else
+        {
+            <p class="text-bg-info text-black p-1"><strong>Status:</strong> @Model[i].Status</p>
         }
     }
-    
-                    
-            
-            <!-- Add a conditional block to display notes only if available -->
-            @if (!string.IsNullOrEmpty(Model[i].DoctorNotes))
-            {
-               <p class="text-bg-primary text-black p-1">Doctor Notes: @Model[i].DoctorNotes</p>
-            }
+}
+
+<!-- Add a conditional block to display notes only if available -->
+@if (!string.IsNullOrEmpty(Model[i].DoctorNotes))
+{
+    <p class="text-bg-primary text-black p-1"><strong>Doctor Notes:</strong> @Model[i].DoctorNotes</p>
+}
             
             <!-- ... (your existing form for deleting) ... -->
         </div>
