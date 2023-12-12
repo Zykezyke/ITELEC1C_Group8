@@ -11,4 +11,5 @@ namespace ITELEC1C_Group8.Enums
     {
         Branch1, Branch2, Branch3, Branch4, Branch5
     }
+
 }
