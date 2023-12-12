@@ -34,7 +34,25 @@ namespace ITELEC1C_Group8.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                // Retrieve the user
+                var user = await _userManager.FindByNameAsync(loginInfo.UserName);
+
+                // Get the roles assigned to the user
+                var roles = await _userManager.GetRolesAsync(user);
+
+                // Check the roles and redirect accordingly
+                if (roles.Contains("Admin"))
+                {
+                    return RedirectToAction("Index", "ShowUsers"); // Redirect Admin to ShowUsers page
+                }
+                else if (roles.Contains("Doctor"))
+                {
+                    return RedirectToAction("ShowAppointment", "Appointment"); // Redirect Doctor to ShowAppointments page
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home"); // Redirect Users to the default home page
+                }
             }
             else
             {

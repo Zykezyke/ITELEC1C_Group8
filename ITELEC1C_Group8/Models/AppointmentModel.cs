@@ -47,5 +47,11 @@ namespace ITELEC1C_Group8.Models
         [Display(Name = "Notes")]
         [Required(ErrorMessage = "Please Enter A Note")]
         public string? Notes { get; set; }
+
+        [Display(Name = "Status")]
+        public AppointmentStatus Status { get; set; } = AppointmentStatus.Pending;
+
+        [Display(Name = "Doctor Notes")]
+        public string? DoctorNotes { get; set; }
     }
 }

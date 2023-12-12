@@ -5,7 +5,7 @@
     ViewData["TItle"] = "Appointment Page";
 }
 @model List<Appointment>
-@using ITELEC1C_Group8.Enums
+@using ITELEC1C_Group8.Enums;
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +47,8 @@
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
-              <div class="divider-custom-icon"><i class="	fas fa-book-medical"></i></div>
+                <div class="divider-custom-line"></div>
+                <!--<div class="divider-custom-icon"><i class="fas fa-star"></i></div>-->
                 <div class="divider-custom-line"></div>
             </div>
             <br />
@@ -57,7 +58,7 @@
     {
         if (i % 3 == 0)
         {
-            // Create a new row for every 3 appointments
+            // Create a new row for every 3 contacts
             if (i > 0)
             {
                 @:</div> <!-- Close the previous row if not the first row -->
@@ -65,12 +66,12 @@
             @:<div class="row">
         }
 
-        <div class="col-md-4">
-            <div class="card border-info mb-3">
-                <div class="card-header">@Model[i].AFullName</div>
-                <div class="card-body text-info">
-                    <h5 class="card-title">@Model[i].AUserName</h5>
-                    <p class="text-black"><strong>Doctor:</strong> @Model[i].SelectedDoctor</p>
+<div class="col-md-4">
+    <div class="card border-info mb-3">
+        <div class="card-header">@Model[i].AFullName</div>
+        <div class="card-body text-info">
+            <h5 class="card-title">@Model[i].AUserName</h5>
+<p class="text-black"><strong>Doctor:</strong> @Model[i].SelectedDoctor</p>
 <p class="text-black"><strong>Branch:</strong> @Model[i].SelectedBranch</p>
 <p class="text-black"><strong>Date:</strong> @Model[i].AppDate</p>
 <p class="text-black"><strong>Notes:</strong> @Model[i].Notes</p>
@@ -91,41 +92,28 @@
         }
     }
 }
-    
 
-                    <p class="text-bg-primary text-black p-1"><strong>Doctor Notes:</strong> @Model[i].DoctorNotes</p>
-
-@if (User.IsInRole("Doctor") && Model[i].Status == AppointmentStatus.Pending)
+<!-- Add a conditional block to display notes only if available -->
+@if (!string.IsNullOrEmpty(Model[i].DoctorNotes))
 {
-    <form method="post" asp-action="UpdateAppointmentStatus" asp-controller="Appointment">
-        <input type="hidden" name="appointmentId" value="@Model[i].AppointmentId" />
-        <input type="hidden" name="status" value="Confirmed" />
-        <div class="mb-3">
-            <label for="doctorNotesConfirmed" class="form-label">Doctor Notes (if any):</label>
-            <textarea class="form-control" id="doctorNotesConfirmed" name="doctorNotes" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Confirm</button>
-    </form>
-
-    <form method="post" asp-action="UpdateAppointmentStatus" asp-controller="Appointment">
-        <input type="hidden" name="appointmentId" value="@Model[i].AppointmentId" />
-        <input type="hidden" name="status" value="Declined" />
-        <div class="mb-3">
-            <label for="doctorNotesDeclined" class="form-label">Doctor Notes (if any):</label>
-            <textarea class="form-control" id="doctorNotesDeclined" name="doctorNotes" rows="3" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-danger">Decline</button>
-    </form>
+    <p class="text-bg-primary text-black p-1"><strong>Doctor Notes:</strong> @Model[i].DoctorNotes</p>
 }
-                </div>
-            </div>
+            
+            <!-- ... (your existing form for deleting) ... -->
         </div>
+    </div>
+</div>
+
 
         @if (i == Model.Count - 1)
         {
             @:</div> <!-- Close the last row -->
         }
     }
+
+                        <div class="text-end text-white">
+                        <a class="btn btn-md btn-info" asp-area="" asp-controller="Appointment" asp-action="AddApp">Go back</a>
+                    </div>
 </div>
  </section>
 

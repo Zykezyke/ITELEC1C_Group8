@@ -12,4 +12,11 @@ namespace ITELEC1C_Group8.Enums
         Taguig, Manila, Pasig, Makati, Ortigas
     }
 
+    public enum AppointmentStatus
+    {
+        Pending,
+        Confirmed,
+        Declined
+    }
+
 }

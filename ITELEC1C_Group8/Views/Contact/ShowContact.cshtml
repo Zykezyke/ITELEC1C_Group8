@@ -70,11 +70,33 @@
                 <div class="card-header">@Model[i].CFullName</div>
                 <div class="card-body text-info">
                     <h5 class="card-title">@Model[i].CEmail</h5>
-                    <p class="card-text">@Model[i].Message</p>
-                            <form method="post" asp-action="Delete" asp-controller="Contact">
-                                <input type="hidden" name="contactId" value="@Model[i].ContactId" />
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                    <p class="text-black"><strong>Message: </strong>@Model[i].Message</p>
+
+                    <!-- Display Admin Reply -->
+                    @if (!string.IsNullOrEmpty(Model[i].AdminReply))
+                    {
+                        <p class="text-bg-success text-white p-1"><strong>Admin Reply: </strong> @Model[i].AdminReply</p>
+                    }
+
+                    @if (string.IsNullOrEmpty(Model[i].AdminReply))
+                    {
+                        <!-- Form for admin to reply -->
+                        <form method="post" asp-action="ReplyToContact" asp-controller="Contact">
+                            <input type="hidden" name="contactId" value="@Model[i].ContactId" />
+
+                            <div class="mb-3">
+                                <label for="replyMessage" class="form-label">Admin Reply:</label>
+                                <textarea class="form-control" id="replyMessage" name="replyMessage" rows="3" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Reply</button>
+                        </form>
+                    }
+
+                    <form method="post" asp-action="Delete" asp-controller="Contact">
+                        <input type="hidden" name="contactId" value="@Model[i].ContactId" />
+                        <button type="submit" class="btn btn-danger mt-2">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>

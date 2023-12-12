@@ -105,44 +105,48 @@
             </div>
             <br />
             <!-- Services Grid Items-->
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Username</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Email Address </th>
-                        <th scope="col">Phone Number </th>
-                        <th scope="col">Clinic Branch</th>
-                        <th scope="col">Update</th>
-                        <th scope="col">Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (doctorUsers != null)
-                    {
-                        foreach (var doctor in doctorUsers)
-                        {
+            @if (doctorUsers != null && doctorUsers.Any())
+            {
+                <!-- Iterate through each distinct branch -->
+                var distinctBranches = doctorUsers.Select(d => d.Branch).Distinct().OrderBy(b => b);
+
+                foreach (var branch in distinctBranches)
+                {
+                    <h2>@branch</h2>
+
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <td>@doctor.UserName</td>
-                                <td>@doctor.FirstName</td>
-                                <td>@doctor.LastName</td>
-                                <td>@doctor.Email</td>
-                                <td>@doctor.PhoneNumber</td>
-                                <td>@doctor.Branch</td>
-                                <td><a class="btn btn-primary" asp-controller="Account" asp-action="Update" asp-route-id="@doctor.Id">Update Details</a></td>
-                                <td><a class="btn btn-danger" asp-controller="Account" asp-action="Delete" asp-route-id="@doctor.Id">Delete User</a></td>
+                                <th scope="col">Username</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email Address</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Update</th>
+                                <th scope="col">Delete</th>
                             </tr>
-                        }
-                    }
-                    else
-                    {
-                        <tr>
-                            <td colspan="8">No doctor users found.</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var doctor in doctorUsers.Where(d => d.Branch == branch))
+                            {
+                                <tr>
+                                    <td>@doctor.UserName</td>
+                                    <td>@doctor.FirstName</td>
+                                    <td>@doctor.LastName</td>
+                                    <td>@doctor.Email</td>
+                                    <td>@doctor.PhoneNumber</td>
+                                    <td><a class="btn btn-primary" asp-controller="Account" asp-action="Update" asp-route-id="@doctor.Id">Update Details</a></td>
+                                    <td><a class="btn btn-danger" asp-controller="Account" asp-action="Delete" asp-route-id="@doctor.Id">Delete User</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <p>No doctor users found.</p>
+            }
             <br />
             <br />
             <!-- Services Section Heading-->

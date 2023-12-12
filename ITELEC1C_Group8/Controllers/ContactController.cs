@@ -46,6 +46,7 @@ namespace ITELEC1C_Group8.Controllers
         public IActionResult AddContact(Contact newContact)
         {
             newContact.SetUserInfo(_userManager, User);
+            newContact.AdminReply = "";
             if (!ModelState.IsValid)
                 return View();
 
@@ -95,7 +96,26 @@ namespace ITELEC1C_Group8.Controllers
             return View(contacts);
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult ReplyToContact(int contactId, string replyMessage)
+        {
+            var contact = _dbData.Contacts.Find(contactId);
 
+            if (contact != null)
+            {
+                // Update the contact with the admin's reply
+                contact.AdminReply = replyMessage;
+                _dbData.SaveChanges();
+                TempData["messages"] = "Reply sent successfully.";
+            }
+            else
+            {
+                TempData["messages"] = "Contact not found.";
+            }
+
+            return RedirectToAction("ShowContact");
+        }
 
     }
 }

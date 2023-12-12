@@ -55,13 +55,50 @@ namespace ITELEC1C_Group8.Controllers
             return RedirectToAction("AddApp", "Appointment");
         }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult ShowAppointment() { 
-            var appointment = _dbData.Appointments.ToList();
-            return View(appointment); 
+        [Authorize(Roles = "Doctor")]
+        public IActionResult ShowAppointment()
+        {
+            // Get the currently signed-in doctor's username
+            var doctorUserName = User.Identity.Name;
+
+            // Filter appointments for the current doctor
+            var appointments = _dbData.Appointments
+                .Where(a => a.SelectedDoctor == doctorUserName)
+                .ToList();
+
+            return View(appointments);
         }
-        
-        
-        
+
+        [Authorize(Roles = "User")]
+        public IActionResult ShowApp()
+        {
+            // Get the currently signed-in user's username
+            var userUserName = User.Identity.Name;
+
+            // Filter appointments for the current user
+            var appointments = _dbData.Appointments
+                .Where(a => a.AUserName == userUserName)
+                .ToList();
+
+            return View(appointments);
+        }
+
+        [Authorize(Roles = "Doctor")]
+        [HttpPost]
+        public IActionResult UpdateAppointmentStatus(int appointmentId, AppointmentStatus status, string doctorNotes)
+        {
+            var appointment = _dbData.Appointments.Find(appointmentId);
+
+            if (appointment != null && appointment.Status == AppointmentStatus.Pending)
+            {
+                appointment.Status = status;
+                // Add logic to get and save doctor notes if needed
+                appointment.DoctorNotes = doctorNotes;
+                _dbData.SaveChanges();
+            }
+
+            return RedirectToAction("ShowAppointment");
+        }
+
     }
 }

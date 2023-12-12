@@ -36,13 +36,16 @@
     </head>
     <body id="page-top"  >
         <!-- Masthead-->
-        <header class="masthead" id="appointment">
+        <header class="masthead" id="appointment" style="background-image: url('/assets/clinicbg.jpg'); background-size: cover;">
+
             <div class="container d-flex align-items-center flex-column">
+
                 <!-- Masthead Avatar Image-->
                 <img class="masthead-avatar mb-5" src="~/assets/img/logo.png" alt="..."  />
                 <!-- Masthead Heading-->
                 <h1 style="color:#101F90;text-align:center;">BOOK YOUR APPOINTMENT</h1>
                <br>
+
                <div class="card" width="30">
                 <!-- Start Card Body -->
                 <div class="card-body" >
@@ -151,11 +154,15 @@
                     <!-- End Submit Button -->
                   </form>
                   <!-- End Form -->
+                    <div class="text-end text-white">
+                        <a class="btn btn-md btn-info" asp-area="" asp-controller="Appointment" asp-action="ShowApp">Show Appointments</a>
+                    </div>
                 </div>
                 <!-- End Card Body -->
               </div>
               <!-- End Card -->
               </div>
+
         </header>
        
         <!-- Bootstrap core JS-->
