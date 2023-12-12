@@ -9,7 +9,7 @@ namespace ITELEC1C_Group8.Enums
 {
     public enum Branch
     {
-        Branch1, Branch2, Branch3, Branch4, Branch5
+        Taguig, Manila, Pasig, Makati, Ortigas
     }
 
     public enum AppointmentStatus
