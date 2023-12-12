@@ -47,7 +47,7 @@ namespace ITELEC1C_Group8.Controllers
                 }
                 else if (roles.Contains("Doctor"))
                 {
-                    return RedirectToAction("ShowAppointments", "Appointment"); // Redirect Doctor to ShowAppointments page
+                    return RedirectToAction("ShowAppointment", "Appointment"); // Redirect Doctor to ShowAppointments page
                 }
                 else
                 {
