@@ -12,11 +12,13 @@ namespace ITELEC1C_Group8.Controllers
         private readonly AppDbContext _dbData;
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
-        public AccountController(AppDbContext dbData, SignInManager<User> signInManager, UserManager<User> userManager)
+        private readonly IWebHostEnvironment _environment;
+        public AccountController(AppDbContext dbData, SignInManager<User> signInManager, UserManager<User> userManager, IWebHostEnvironment environment)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _dbData = dbData;
+            _environment = environment;
         }
 
         [HttpGet]
@@ -114,6 +116,20 @@ namespace ITELEC1C_Group8.Controllers
                         PhoneNumber = userEnteredData.Phone,
                         Branch = userEnteredData.Branch.Value
                     };
+                    if (userEnteredData.DoctorPfp != null)
+                    {
+                        string folder = "doctors/images/";
+                        string servFolder = Path.Combine(_environment.WebRootPath, folder);
+                        string uniqueFileName = Guid.NewGuid().ToString() + "_" + userEnteredData.DoctorPfp.FileName;
+                        string filePath = Path.Combine(servFolder, uniqueFileName);
+
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await userEnteredData.DoctorPfp.CopyToAsync(fileStream);
+                        }
+
+                        newDoctor.imagePath = folder + uniqueFileName; // Assuming you have an ImagePath property in your Doctor model
+                    }
 
                     result = await _userManager.CreateAsync(newDoctor, userEnteredData.Password);
                 }

@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Portfolio Page";
+    var doctorUsers = ViewData["DoctorUsers"] as List<ITELEC1C_Group8.Data.Doctor>;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +21,11 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        .equal-image {
+            height: 300px; /* Adjust the height as needed */
+        }
+    </style>
 </head>
 <body id="page-top">
    
@@ -28,7 +33,7 @@
     <section class="page-section portfolio" id="portfolio">
         <div class="container p-5">
             <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">What can we offer?</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Our doctors</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
@@ -37,62 +42,68 @@
             </div>
             <!-- Portfolio Grid Items-->
             <div class="row justify-content-center">
-                <!-- Portfolio Item 1-->
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-thumbnail" src="assets/img/portfolio/derma.png" alt="..." />
-                    </div>
+                <div class="row justify-content-center">
+                    @if (doctorUsers != null && doctorUsers.Any())
+                    {
+                        var index = 1;
+                        foreach (var doctor in doctorUsers)
+                        {
+                            <div class="col-md-6 col-lg-4 mb-5">
+                                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal@(index)">
+                                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                                    </div>
+                                    <img class="img-thumbnail equal-image" src="/@doctor.imagePath" alt="Doctor Image" />
+                                </div>
+                            </div>
+
+                            <!-- Portfolio Modal for Doctor @(index) -->
+                            <div class="portfolio-modal modal fade" id="portfolioModal@(index)" tabindex="-1" aria-labelledby="portfolioModal@(index)" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                        <div class="modal-body text-center pb-5">
+                                            <div class="container">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-lg-8">
+                                                        <!-- Portfolio Modal - Title-->
+                                                        <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">@doctor.FirstName</h2>
+                                                        <!-- Icon Divider-->
+                                                        <div class="divider-custom">
+                                                            <div class="divider-custom-line"></div>
+                                                            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                                            <div class="divider-custom-line"></div>
+                                                        </div>
+                                                        <!-- Portfolio Modal - Image-->
+                                                        <img class="img-fluid rounded mb-5 equal-image" src="/@doctor.imagePath" alt="Doctor Image" />
+                                                        <!-- Additional Text Fields -->
+                                                        <p class="mb-2"><strong>Username:</strong> @doctor.UserName</p>
+                                                        <p class="mb-2"><strong>First Name:</strong> @doctor.FirstName</p>
+                                                        <p class="mb-2"><strong>Last Name:</strong> @doctor.LastName</p>
+                                                        <p class="mb-2"><strong>Email:</strong> @doctor.Email</p>
+                                                        <p class="mb-2"><strong>Phone Number:</strong> @doctor.PhoneNumber</p>
+                                                        <p class="mb-2"><strong>Branch:</strong> @doctor.Branch</p>
+                                                        <!-- Add more properties as needed -->
+                                                        <button class="btn btn-primary" data-bs-dismiss="modal">
+                                                            <i class="fas fa-xmark fa-fw"></i>
+                                                            Close Window
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            index++;
+                        }
+                    }
+                    else
+                    {
+                        <p>No doctor users found.</p>
+                    }
                 </div>
-                <!-- Portfolio Item 2-->
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-thumbnail" src="assets/img/portfolio/pedia.png" alt="..." />
-                    </div>
-                </div>
-                <!-- Portfolio Item 3-->
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-thumbnail" src="assets/img/portfolio/cardio.png" alt="..." />
-                    </div>
-                </div>
-                <!-- Portfolio Item 4-->
-                <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-thumbnail" src="assets/img/portfolio/neuro.png" alt="..." />
-                    </div>
-                </div>
-                <!-- Portfolio Item 5-->
-                <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-thumbnail" src="assets/img/portfolio/phys.png" alt="..." />
-                    </div>
-                </div>
-                <!-- Portfolio Item 6-->
-                <div class="col-md-6 col-lg-4">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-thumbnail" src="assets/img/portfolio/radio.png" alt="..." />
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
     
     <!-- Portfolio Modals-->
