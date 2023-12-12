@@ -5,6 +5,7 @@
     ViewData["TItle"] = "Appointment Page";
 }
 @model List<Appointment>
+@using ITELEC1C_Group8.Enums;
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,22 +66,46 @@
             @:<div class="row">
         }
 
-        <div class="col-md-4">
-            <div class="card border-info mb-3">
-                <div class="card-header">@Model[i].AFullName</div>
-                <div class="card-body text-info">
-                    <h5 class="card-title">@Model[i].AUserName</h5>
-                    <p class="card-text">Doctor: @Model[i].SelectedDoctor</p>
-                    <p class="card-text">Branch: @Model[i].SelectedBranch</p>
-                     <p class="card-text">Date: @Model[i].AppDate</p>
-                    <p class="card-text">Notes: @Model[i].Notes</p>
-                            <form method="post" asp-action="Delete" asp-controller="Appointment">
-                                <input type="hidden" name="contactId" value="@Model[i].AppointmentId" />
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                </div>
-            </div>
+<div class="col-md-4">
+    <div class="card border-info mb-3">
+        <div class="card-header">@Model[i].AFullName</div>
+        <div class="card-body text-info">
+            <h5 class="card-title">@Model[i].AUserName</h5>
+                    <p class="text-black">Doctor: @Model[i].SelectedDoctor</p>
+                    <p class="text-black">Branch: @Model[i].SelectedBranch</p>
+                    <p class="text-black">Date: @Model[i].AppDate</p>
+                    <p class="text-black">Notes: @Model[i].Notes</p>
+                     @{
+        if (i < Model.Count)
+        {
+            if (Model[i].Status == AppointmentStatus.Confirmed)
+            {
+                <p class="text-bg-success text-white p-1"> Status: @Model[i].Status</p>
+            }
+            else if (Model[i].Status == AppointmentStatus.Declined)
+            {
+                <p class="text-bg-danger text-black p-1"> Status: @Model[i].Status</p>
+            }
+            else
+            {
+               <p class="text-bg-info text-black p-1"> Status: @Model[i].Status</p>
+            }
+        }
+    }
+    
+                    
+            
+            <!-- Add a conditional block to display notes only if available -->
+            @if (!string.IsNullOrEmpty(Model[i].DoctorNotes))
+            {
+               <p class="text-bg-primary text-black p-1">Doctor Notes: @Model[i].DoctorNotes</p>
+            }
+            
+            <!-- ... (your existing form for deleting) ... -->
         </div>
+    </div>
+</div>
+
 
         @if (i == Model.Count - 1)
         {

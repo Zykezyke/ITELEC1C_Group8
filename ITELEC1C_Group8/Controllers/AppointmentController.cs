@@ -83,7 +83,22 @@ namespace ITELEC1C_Group8.Controllers
             return View(appointments);
         }
 
+        [Authorize(Roles = "Doctor")]
+        [HttpPost]
+        public IActionResult UpdateAppointmentStatus(int appointmentId, AppointmentStatus status, string doctorNotes)
+        {
+            var appointment = _dbData.Appointments.Find(appointmentId);
 
+            if (appointment != null && appointment.Status == AppointmentStatus.Pending)
+            {
+                appointment.Status = status;
+                // Add logic to get and save doctor notes if needed
+                appointment.DoctorNotes = doctorNotes;
+                _dbData.SaveChanges();
+            }
+
+            return RedirectToAction("ShowAppointment");
+        }
 
     }
 }
