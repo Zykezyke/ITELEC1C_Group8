@@ -28,7 +28,7 @@
     </style>
 </head>
 <body id="page-top">
-   
+
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container p-5">
@@ -45,58 +45,51 @@
                 <div class="row justify-content-center">
                     @if (doctorUsers != null && doctorUsers.Any())
                     {
-                        var index = 1;
-                        foreach (var doctor in doctorUsers)
-                        {
-                            <div class="col-md-6 col-lg-4 mb-5">
-                                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal@(index)">
-                                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                                    </div>
-                                    <img class="img-thumbnail equal-image" src="/@doctor.imagePath" alt="Doctor Image" />
-                                </div>
-                            </div>
+                        // Get distinct branches
+                        var distinctBranches = doctorUsers.Select(d => d.Branch).Distinct().OrderBy(b => b);
 
-                            <!-- Portfolio Modal for Doctor @(index) -->
-                            <div class="portfolio-modal modal fade" id="portfolioModal@(index)" tabindex="-1" aria-labelledby="portfolioModal@(index)" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                        <div class="modal-body text-center pb-5">
-                                            <div class="container">
-                                                <div class="row justify-content-center">
-                                                    <div class="col-lg-8">
-                                                        <!-- Portfolio Modal - Title-->
-                                                        <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">@doctor.FirstName</h2>
-                                                        <!-- Icon Divider-->
-                                                        <div class="divider-custom">
-                                                            <div class="divider-custom-line"></div>
-                                                            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                                            <div class="divider-custom-line"></div>
-                                                        </div>
-                                                        <!-- Portfolio Modal - Image-->
-                                                        <img class="img-fluid rounded mb-5 equal-image" src="/@doctor.imagePath" alt="Doctor Image" />
-                                                        <!-- Additional Text Fields -->
-                                                        <p class="mb-2"><strong>Username:</strong> @doctor.UserName</p>
-                                                        <p class="mb-2"><strong>First Name:</strong> @doctor.FirstName</p>
-                                                        <p class="mb-2"><strong>Last Name:</strong> @doctor.LastName</p>
-                                                        <p class="mb-2"><strong>Email:</strong> @doctor.Email</p>
-                                                        <p class="mb-2"><strong>Phone Number:</strong> @doctor.PhoneNumber</p>
-                                                        <p class="mb-2"><strong>Branch:</strong> @doctor.Branch</p>
-                                                        <!-- Add more properties as needed -->
-                                                        <button class="btn btn-primary" data-bs-dismiss="modal">
-                                                            <i class="fas fa-xmark fa-fw"></i>
-                                                            Close Window
-                                                        </button>
+                        foreach (var branch in distinctBranches)
+                        {
+                            var doctorsInBranch = doctorUsers.Where(d => d.Branch == branch);
+
+                            if (doctorsInBranch.Any())
+                            {
+                                var index = 1;
+                                <div class="col-md-12">
+                                    <h3>@branch</h3>
+                                    <hr />
+
+                                    <div class="row">
+                                        
+                                        @foreach (var doctor in doctorsInBranch)
+                                        {
+                                            <div class="col-md-6 col-lg-4 mb-5">
+                                                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal@(index)">
+                                                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                                                     </div>
+                                                    <img class="img-thumbnail equal-image" src="/@doctor.imagePath" alt="Doctor Image" />
                                                 </div>
                                             </div>
-                                        </div>
+
+                                            <!-- Portfolio Modal for Doctor @(index) -->
+                                            <div class="portfolio-modal modal fade" id="portfolioModal@(index)" tabindex="-1" aria-labelledby="portfolioModal@(index)" aria-hidden="true">
+                                                <!-- Modal content here -->
+                                            </div>
+
+                                            index++;
+                                        }
                                     </div>
                                 </div>
-                            </div>
-
-                            index++;
+                            }
+                            else
+                            {
+                                <div class="col-md-12 text-center">
+                                    <h3>@branch</h3>
+                                    <p>No doctors in this branch.</p>
+                                    <hr />
+                                </div>
+                            }
                         }
                     }
                     else
@@ -104,7 +97,10 @@
                         <p>No doctor users found.</p>
                     }
                 </div>
+            </div>
+        </div>
     </section>
+
     
     <!-- Portfolio Modals-->
     <!-- Portfolio Modal 1-->
