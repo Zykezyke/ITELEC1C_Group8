@@ -8,12 +8,12 @@ namespace ITELEC1C_Group8.Migrations
     /// <inheritdoc />
     public partial class UpdateAppointmentTable : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // Drop existing Appointments table if it exists
-            migrationBuilder.Sql("DROP TABLE IF EXISTS [Appointments]");
 
-            // Create the new Appointments table
+                    // Drop existing Appointments table if it exists
+        migrationBuilder.Sql("DROP TABLE IF EXISTS [Appointments]");
             migrationBuilder.CreateTable(
                 name: "Appointments",
                 columns: table => new
@@ -35,13 +35,30 @@ namespace ITELEC1C_Group8.Migrations
                 {
                     table.PrimaryKey("PK_Appointments", x => x.AppointmentId);
                 });
+
+         
+
+            migrationBuilder.AddColumn<int>(
+    name: "Status",
+    table: "Appointments",
+    type: "int",
+    nullable: false,
+    defaultValue: 0);
+
+            migrationBuilder.AddColumn<string>(
+                name: "DoctorNotes",
+                table: "Appointments",
+                type: "nvarchar(max)",
+                nullable: true,
+                defaultValue: "No notes");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Appointments");
+
         }
     }
-
 }

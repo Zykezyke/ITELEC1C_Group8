@@ -106,11 +106,18 @@
                     <div class="card-header">@contactItem.CFullName</div>
                     <div class="card-body text-info">
                         <h5 class="card-title">@contactItem.CEmail</h5>
-                        <p class="card-text">@contactItem.Message</p>
-                                                    <form method="post" asp-action="Delete" asp-controller="Contact">
-                                <input type="hidden" name="contactId" value="@contactItem.ContactId" />
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                        <p class="text-black"><strong>Message: </strong> @contactItem.Message</p>
+
+                        <!-- Display Admin Reply -->
+                        @if (!string.IsNullOrEmpty(contactItem.AdminReply))
+                        {
+                            <p class="text-bg-success text-white p-1"><strong>Admin Reply:</strong> @contactItem.AdminReply</p>
+                        }
+
+                        <form method="post" asp-action="Delete" asp-controller="Contact">
+                            <input type="hidden" name="contactId" value="@contactItem.ContactId" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -125,8 +132,8 @@
 else
 {
     <div class="container">
-     <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">No contacts found for the current user.</h2>
-     </div>
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">No contacts found for the current user.</h2>
+    </div>
 }
     </section>
    

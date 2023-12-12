@@ -33,5 +33,9 @@ namespace ITELEC1C_Group8.Models
         [Display(Name = "Message")]
         [Required(ErrorMessage = "Please Enter A Message")]
         public string Message { get; set; }
+
+
+        [Display(Name = "Admin Reply")]
+        public string? AdminReply { get; set; }
     }
 }
