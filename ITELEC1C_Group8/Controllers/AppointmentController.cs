@@ -55,7 +55,35 @@ namespace ITELEC1C_Group8.Controllers
             return RedirectToAction("AddApp", "Appointment");
         }
 
-        
-        
+        [Authorize(Roles = "Doctor")]
+        public IActionResult ShowAppointment()
+        {
+            // Get the currently signed-in doctor's username
+            var doctorUserName = User.Identity.Name;
+
+            // Filter appointments for the current doctor
+            var appointments = _dbData.Appointments
+                .Where(a => a.SelectedDoctor == doctorUserName)
+                .ToList();
+
+            return View(appointments);
+        }
+
+        [Authorize(Roles = "User")]
+        public IActionResult ShowApp()
+        {
+            // Get the currently signed-in user's username
+            var userUserName = User.Identity.Name;
+
+            // Filter appointments for the current user
+            var appointments = _dbData.Appointments
+                .Where(a => a.AUserName == userUserName)
+                .ToList();
+
+            return View(appointments);
+        }
+
+
+
     }
 }
