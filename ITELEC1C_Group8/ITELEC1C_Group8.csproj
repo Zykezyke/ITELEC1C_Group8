@@ -25,7 +25,9 @@
     <None Remove="Views\Contact\" />
   </ItemGroup>
 
-  <ItemGroup>
+ <ItemGroup>
+    <!-- Use the merged folder structure -->
     <Folder Include="wwwroot\doctors\images\" />
+    <Folder Include="wwwroot\assets\img\NewFolder\" />
   </ItemGroup>
 </Project>
