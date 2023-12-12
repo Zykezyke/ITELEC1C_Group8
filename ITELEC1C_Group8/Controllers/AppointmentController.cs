@@ -55,6 +55,12 @@ namespace ITELEC1C_Group8.Controllers
             return RedirectToAction("AddApp", "Appointment");
         }
 
+        [Authorize(Roles = "Admin")]
+        public IActionResult ShowAppointment() { 
+            var appointment = _dbData.Appointments.ToList();
+            return View(appointment); 
+        }
+        
         
         
     }
