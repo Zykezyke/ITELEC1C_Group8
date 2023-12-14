@@ -100,5 +100,25 @@ namespace ITELEC1C_Group8.Controllers
             return RedirectToAction("ShowAppointment");
         }
 
+        [Authorize(Roles = "User")]
+        [HttpPost]
+        public IActionResult DeleteAppointment(int appointmentId)
+        {
+            var appointment = _dbData.Appointments.Find(appointmentId);
+
+            // Check if the appointment exists and its status is Declined
+            if (appointment != null && appointment.Status == AppointmentStatus.Declined)
+            {
+                _dbData.Appointments.Remove(appointment);
+                _dbData.SaveChanges();
+                TempData["messages"] = "Appointment deleted successfully.";
+            }
+            else
+            {
+                TempData["messages"] = "Cannot delete the appointment.";
+            }
+
+            return RedirectToAction("ShowApp");
+        }
     }
 }

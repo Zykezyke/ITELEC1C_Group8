@@ -99,7 +99,12 @@
     <p class="text-bg-primary text-black p-1"><strong>Doctor Notes:</strong> @Model[i].DoctorNotes</p>
 }
             
-            <!-- ... (your existing form for deleting) ... -->
+    @if (Model[i].Status == AppointmentStatus.Declined)
+    {
+        <form method="post" asp-controller="Appointment" asp-action="DeleteAppointment" asp-route-appointmentId="@Model[i].AppointmentId">
+            <button type="submit" class="btn btn-danger">Delete Appointment</button>
+        </form>
+    }
         </div>
     </div>
 </div>
@@ -110,6 +115,7 @@
             @:</div> <!-- Close the last row -->
         }
     }
+
 
                         <div class="text-end text-white">
                         <a class="btn btn-md btn-info" asp-area="" asp-controller="Appointment" asp-action="AddApp">Go back</a>
